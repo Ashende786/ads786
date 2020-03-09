@@ -29,7 +29,7 @@ img {
 			<td>
 			<marquee>
 				<h2>
-					<font color="green">Thank you for visiting Deshseva.in</font>
+					<font color="green">Thank you for visiting Deshseva.in1</font>
 					<font color="orange">Lets Play here and Serve to Farmers and Soilders Families financially in India.</font>
 				</h2>
 			<marquee>
@@ -72,7 +72,7 @@ Alternate Mobile number
 
 <p id="demo"></p>
 
-<script>
+<script type="text/javascript">
 
 
 /* Code to get selected numbers from grid on home page - START*/
@@ -145,6 +145,17 @@ Alternate Mobile number
 		{	
 			
 			var xhttp = new XMLHttpRequest();
+			
+			xhttp.onload = function() 
+			{
+				const serverResponse = document.getElementById("serverResponse");
+				serverResponse.innerText = this.responseText;
+				// Do whatever with response
+				window.alert(http.responseText);
+				
+			}	
+			
+			
 			xhttp.open("POST",'https://stn1947.azurewebsites.net/api/user', true);
 			window.alert('http connection opened');
 			
@@ -154,12 +165,7 @@ Alternate Mobile number
 			xhttp.send(jsonstring);			// posting values here...
 			window.alert(jsonstring);
 			
-			xhttp.onload = function() 
-			{
-				// Do whatever with response
-				alert(http.responseText);
-				
-			}				
+					
 			
 			
 		}
