@@ -1,0 +1,183 @@
+<html>
+<head>
+
+<style>
+h1 {text-align:center;}
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
+</head>
+
+<body>
+<table align='center' border='1' cellpadding='2' cellspacing='2'>
+		<tr>
+			<!-- First Row-->
+			<td></td>
+			<td><!-- hitwebcounter Code START -->
+			<a href="https://www.hitwebcounter.com" target="_blank">
+			<img src="https://hitwebcounter.com/counter/counter.php?page=7195907&style=0024&nbdigits=5&type=page&initCount=0" title="User Stats" Alt="webcounterwebsite"   border="0" >
+			</a>  </td>
+			<td></td>
+		</tr>
+		<tr>
+			<!-- Last Row-->
+			<td></td>
+			<td>
+			<marquee>
+				<h2>
+					<font color="green">Thank you for visiting Deshseva.in</font>
+					<font color="orange">Lets Play here and Serve to Farmers and Soilders Families financially in India.</font>
+				</h2>
+			<marquee>
+			</td>
+			<td></td>
+		</tr>
+</table>
+
+ 
+<h1>
+<font color="red">C O M I N G   S O O N </font>
+</h1>
+
+<img src="deshseva-homepage-img.gif" alt="Italian Trulli" style="width:25%;">
+<br>
+<br>
+
+Email address
+<input type=text id="email" name="email" value="ashende786@gmail.com">
+</input>
+<br>
+
+Full Name
+<input type=text id="fullname" name="fullname" value="AshwinShende">
+</input>
+
+<br>
+Mobile number
+<input type=text id="mobile" name="mobile" value="9527143872">
+</input>
+
+<br>
+Alternate Mobile number
+<input type=text id="mobile1" name="mobile1" value="9422407240">
+</input>
+
+<h1>
+<font color="red">PLEASE SELECT 5 NUMBERS</font>
+</h1>
+
+<p id="demo"></p>
+
+<script>
+
+
+/* Code to get selected numbers from grid on home page - START*/
+    window.onload = function()
+    {
+        var all = document.getElementsByTagName("td");
+        for (var i=0;i<all.length;i++) 
+		{		
+			{
+            		all[i].onclick = inputClickHandler;
+			}       
+		}
+    }
+	/*code to color the selected grid cell*/
+    function inputClickHandler(e)
+	{
+		
+			e = e || window.event;
+			var tdElm = e.target;
+					
+			var textcellval = tdElm.innerText;
+			
+			document.getElementById('lbl1').innerText+=textcellval+",";	
+						
+			if(tdElm.style.backgroundColor == 'rgb(255, 0, 0)')
+			{
+				tdElm.style.backgroundColor = '#fff';
+			}
+			else 
+			{
+				tdElm.style.backgroundColor = '#f00';
+			}			
+	}
+	var mytable = "<table Id='tableData' align='center' border='1' cellpadding='2' cellspacing='2'><tbody><tr>";
+	for (var i = 1; i < 71; i++)
+	{
+		if (i % 10 == 1 && i != 1){
+			mytable += "</tr><tr>";	
+		}				
+		{	
+			mytable += "<td>" + i + "</td>";
+		}
+	};
+		mytable += "</tr></tbody></table>";
+		document.write(mytable);		
+		
+/* Code to get selected numbers from grid on home page - END*/	
+			
+/* code to post user data into database - START*/			
+	function SaveUserInfo()
+	{
+			/*++++++FORM DATA COLLECTION*/
+			
+			/*https://stackoverflow.com/questions/9713058/send-post-data-using-xmlhttprequest*/
+			var obj = new Object();
+			obj.fullname = document.getElementById("fullname").value;
+			obj.EmailId = document.getElementById("email").value;
+			obj.mobile1 = document.getElementById("mobile").value;
+			obj.ChosenLotteryNumbers = document.getElementById("lbl1").innerText;
+			
+			//getting todays date and time			
+			var date = new Date();
+			var TimeStamp = date.toLocaleString();
+			obj.PurchaseDate = TimeStamp
+									
+			var jsonstring = JSON.stringify(obj);
+			/*document.write(jsonstring);*/
+					
+		try
+		{	
+			
+			var xhttp = new XMLHttpRequest();
+			xhttp.open("POST",'https://localhost:44357/api/user', true);
+			window.alert('http connection opened');
+			
+			xhttp.setRequestHeader('Content-Type','application/json');
+			window.alert('request header has been set');
+			
+			xhttp.send(jsonstring);			// posting values here...
+			window.alert(jsonstring);
+			
+			xhttp.onload = function() 
+			{
+				// Do whatever with response
+				alert(http.responseText);
+				
+			}				
+			
+			
+		}
+		catch(err)
+		{
+			window.alert(err.message);
+		}
+	}
+/* code to post user data into database - END*/	
+
+
+		
+</script>
+your selected lottery numbers are :
+
+<label id='lbl1' name="lbl1" > </label>
+<br>
+<br>
+<button type="Submit" onclick="SaveUserInfo()">Save your Info</button>
+</body>
+</html>
